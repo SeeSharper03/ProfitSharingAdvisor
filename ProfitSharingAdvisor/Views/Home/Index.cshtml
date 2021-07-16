@@ -1,0 +1,38 @@
+﻿@model HomeViewModel
+@using HRServices.Extentions;
+@section Scripts
+{
+    <script src="@Url.Content("~/js/Home-Index.js")"></script>
+}
+@{
+
+    ViewData["Title"] = "Profit Sharing Advisor";
+}
+
+<h3 class="text-center">Current Employee Salaries</h3>
+<div id="chart"></div>
+
+<div class="content">
+    <h3>Proposed Bonuses Based on Current Employee Evaluations</h3>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Salary</th>
+            <th>Current Evaluation Rating</th>
+            <th>Target Bonus</th>
+            <th>Proposed Bonus Amount</th>
+        </tr>
+        @foreach (var proposedBonus in Model.BonusProposals)
+        {
+            <tr>
+                <td>@proposedBonus.Employee.Employee_Name</td>
+                <td>@proposedBonus.Employee.Employee_Age</td>
+                <td>@proposedBonus.Employee.Employee_Salary.ToString("c")</td>
+                <td>@proposedBonus.Rating.ToStringValue()</td>
+                <td>@proposedBonus.TargetBonus.ToString("P")</td>
+                <td>@proposedBonus.ProposedBonusAmount.ToString("c")</td>
+            </tr>
+        }
+    </table>
+</div>
